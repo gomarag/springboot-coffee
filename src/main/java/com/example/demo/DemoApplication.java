@@ -104,7 +104,7 @@ class RestApiDemoController {
 		}
 		return (coffeeIndex == -1)
 				? new ResponseEntity<>(postCoffee(coffee), HttpStatus.CREATED)
-				: new ResponseEntity<>(coffee, HttpStatus.OK)
+				: new ResponseEntity<>(coffee, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
