@@ -24,6 +24,7 @@ import jakarta.persistence.Id;
 
 @SpringBootApplication
 public class DemoApplication {
+	private final CoffeeRepository coffeeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -68,10 +69,13 @@ class Coffee {
 @RestController
 @RequestMapping("/coffees")
 class RestApiDemoController {
-	private List<Coffee> coffees = new ArrayList<>();
+	// private List<Coffee> coffees = new ArrayList<>();
+	private final CoffeeRepository coffeeRepository;
 
-	public RestApiDemoController() {
-		coffees.addAll(List.of(
+	public RestApiDemoController(CoffeeRepository coffeeRepository) {
+		this.coffeeRepository = coffeeRepository;
+
+		this.coffeeRepository.saveAll(List.of(
 				new Coffee("Cafe Americano"),
 				new Coffee("Cafe Latte"),
 				new Coffee("Cafe Mocha"),
