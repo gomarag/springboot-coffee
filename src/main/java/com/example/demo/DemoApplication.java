@@ -93,7 +93,7 @@ class RestApiDemoController {
 	}
 
 	@PutMapping("/{id}")
-	Coffee putCoffee(@PathVariable String id, @RequestBody Coffee coffee) {
+	ResponseEntity<Coffee> putCoffee(@PathVariable String id, @RequestBody Coffee coffee) {
 		int coffeeIndex = -1;
 
 		for (Coffee c : coffees) {
