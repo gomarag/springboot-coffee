@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,17 +20,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @SpringBootApplication
 public class DemoApplication {
-	private final CoffeeRepository coffeeRepository;
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
+	
+}
+@Component
+class DataLoader {
+	private final CoffeeRepository coffeeRepository;
 
+	public DataLoader(CoffeeRepository coffeeRepository) {
+		this.coffeeRepository = coffeeRepository;
+	}
+
+	@PostConstruct
+	private void loadData() {
+		coffeeRepository.saveAll(List.of(
+				new Coffee("Cafe Americano"),
+				new Coffee("Cafe Latte"),
+				new Coffee("Cafe Mocha"),
+				new Coffee("Cappuccino")
+			)
+		);
+	}
 }
 
 interface CoffeeRepository extends CrudRepository<Coffee, String> {}
@@ -74,12 +94,6 @@ class RestApiDemoController {
 
 	public RestApiDemoController(CoffeeRepository coffeeRepository) {
 		this.coffeeRepository = coffeeRepository;
-
-		this.coffeeRepository.saveAll(List.of(
-				new Coffee("Cafe Americano"),
-				new Coffee("Cafe Latte"),
-				new Coffee("Cafe Mocha"),
-				new Coffee("Cappuccino")));
 	}
 
 	// @RequestMapping(value="/coffees", method=RequestMethod.GET)
