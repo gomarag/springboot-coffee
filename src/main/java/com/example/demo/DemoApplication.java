@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -28,7 +30,9 @@ public class DemoApplication {
 
 }
 
+@Entity
 class Coffee {
+	@Id
 	private String id;
 	private String name;
 
@@ -43,6 +47,10 @@ class Coffee {
 
 	public String getId() {
 		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
