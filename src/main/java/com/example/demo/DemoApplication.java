@@ -29,7 +29,7 @@ public class DemoApplication {
 }
 
 class Coffee {
-	private final String id;
+	private String id;
 	private String name;
 
 	public Coffee(String id, String name) {

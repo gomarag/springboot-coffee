@@ -1,0 +1,25 @@
+GET http://127.0.0.1:8080/coffees/ HTTP/1.1
+
+###
+POST http://127.0.0.1:8080/coffees/ HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Cafe au lait",
+    "id": "999"
+}
+
+###
+GET http://localhost:8080/coffees/999 HTTP/1.1
+
+###
+DELETE http://localhost:8080/coffees/67eacd0a-4d03-4a9c-8ceb-13aadaea55ee HTTP/1.1
+
+###
+PUT http://localhost:8080/coffees/999 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Cafe au lait with orange",
+    "id": "999"
+}
